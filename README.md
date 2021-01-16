@@ -38,7 +38,7 @@ sites each password belongs too. This is exactly the same but instead of passwor
     1. You need to set less-secure-app inside your gmail settings to on. This allows gmail
     to be able to send emails using application like python
 
-## what are dataclasees?
+## what are dataclasses?
 Dataclasses was introduced in Python 3.7 but it is backported to python 3.6 and is now part of the standard Python library. Datatclassess have many functionality but one of the biggest functionality is the elimination of writing __init__, __repr__, __eq__, etc. 
 
 Take these two classes
@@ -55,7 +55,7 @@ Take these two classes
     
     Now with dataclassess
     
-    from dataclasses import dataclass
+    from dataclasses import dataclass, field
     
     @dataclass
     Car(object):
