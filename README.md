@@ -34,7 +34,7 @@ sites each password belongs too. This is exactly the same but instead of passwor
 
 ## Prerequisites
 1. Install python 3.8 or higher than Python 3.7. This application uses a lot of the latest python modules like dataclasses. etc
-1. To be able to send emails from this application you need a Gmail account.
+1. To be able to send emails from this application you need a Gmail account. I decided to use Gmail instead of API keys
     1. You need to set less-secure-app inside your gmail settings to on. This allows gmail
     to be able to send emails using application like python
 
@@ -52,7 +52,7 @@ is always a good idea to create a new environment so that you do not break any p
     
     This will download everything needed to run the application
     
-1. Next create .env file in your root folder and adding the following things to it inside the quotation.
+1. Next create .env file in your root folder and adding the following things to it inside the quotation. This email and address must be gmail
 
 
     1. EMAIL_ADDRESS = ""
