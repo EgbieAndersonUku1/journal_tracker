@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Not authorized {% endblock %}
+
+
+{% block content %}
+
+<section class="information_page">
+    <div class="container-fluid text-center">
+
+        <h1 class="display-4 error_code">403</h1>
+        <p class="lead displayMessage">You not authorized to view this page
+        </p>
+        <p class="lead displayMessage">
+            Don't worry hit the back button and you to go back to the homepage
+        </p>
+        <hr class="my-4">
+        <p></p>
+
+        <div class="home_button">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('home_app.home') }}" role="button">Take me home</a>
+
+        </div>
+    </div>
+    </div>
+
+
+</section>
+
+{% endblock %}

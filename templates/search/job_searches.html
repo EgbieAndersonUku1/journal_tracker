@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %} Queried jobs {% endblock %}
+{% from "__formhelpers.html" import render_field %}
+{% block content %}
+
+
+<section id="searchResult">
+    <div class="container">
+
+        {% if jobs.total > 0  %}
+        <h2 class="searchResultHeading">My job searches</h2>
+        {% else %}
+        <h2 class="searchResultHeading">No jobs found based on queried search</h2>
+        {% endif %}
+        <hr>
+
+        <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2">
+
+
+            {% for job in jobs.items %}
+            <div class="col mb-4">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h3 class="card-title"><a href="{{ url_for('job_app.get_job_with_id', job_id=job.id) }}">{{ job.title.title() }}</a></h3>
+                        <hr>
+                        <p class="lead">Location: {{ job.location.title() }}</p>
+                        <p class="lead">Company: {{ job.company.title() }}</p>
+                        <p class="lead">Salary: £{{ job.salary }} </p>
+                        <p class="lead">Job Site: {{ job.applied_job_from.title()  }}</p>
+                        <p class="lead">Applied on: <strong>{{ job.applied_date.strftime("%A %d %B %Y, %H:%M:%S") }}</strong></p>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+            <!-- Pagination Links-->
+
+        </div>
+
+
+        {% if jobs.items %}
+        <div class="text-right">
+            <a href="{{ url_for('job_app.queried_job_search', page=jobs.prev_num) }}"
+               class="btn btn-outline-dark
+       {% if jobs.page == 1 %}disabled{% endif %}">
+                &laquo;
+            </a>
+            <!-- Loop through the number of pages to display a link for each-->
+            {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+            <!-- Check for the active page and set the link to "Active"-->
+            {% if jobs.page == page_num %}
+            <a href="{{ url_for('job_app.queried_job_search', page=page_num, display=True) }}"
+               class="btn btn-dark">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('job_app.queried_job_search', page=page_num) }}"
+               class="btn btn-outline-dark">
+                {{ page_num }}
+            </a>
+            {% endif %}
+            {% else %}
+            ...
+            {% endif %}
+            {% endfor %}
+            <a href="{{ url_for('job_app.queried_job_search', page=jobs.next_num) }}"
+               class="btn btn-outline-dark
+       {% if jobs.page == jobs.pages %}disabled{% endif %}">
+                &raquo;
+            </a>
+        </div>
+        <p class="text-right mt-3">
+            Showing page {{ jobs.page }} of {{ jobs.pages }}
+        </p>
+
+    </div>
+    {% endif %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,276 @@
+{% extends "base.html"  %}
+
+{% from "__formhelpers.html" import render_field %}
+{% block title %} Home Page {% endblock %}
+
+
+{% block content %}
+
+<section id="aboutJobTracker">
+    <div class="container aboutJobTracker">
+
+        {% include "flash_messages.html" %}
+        <h1 class="jobTrackerH1Header">Job Tracker</h1>
+
+        <div class="row">
+            <div class="col-lg-5 offset-lg-4 mb-3">
+                <img class="jobImage img-fluid" src="{{ url_for('static', filename='images/takingNotes.png') }}" alt="">
+
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-lg-9 col-md-6 offset-lg-2">
+
+                <div class="aboutJobJournalTrackerInfo">
+                    <p class="jobTrackerParagraph">JobJournalTracker is a web based journal application
+                        that allows <strong>you</strong> the user to consolidate all your job searches, job applications, interviews,
+                        responses from employers into one easy to view place.
+                    </p>
+
+                    <p class="jobTrackerParagraph">
+                        Different sites like Indeed, Linkedln, etc allow you to keep a record of your job history but not if the job
+                        was applied using a different job site. For example you won't be able to see your indeed job history
+                        in your Linkedln account and if you applied for other jobs using any other sites you certainly won't
+                        be able to see them in any of your job accounts, not to mention keeping track off all those job searches
+                        from different accounts can be a hassle
+                    </p>
+
+                    <p class="jobTrackerParagraph">Once you have created an account, JobJournalTracker allows to keep
+                        track off all the job you applied for using an easy to use user interface. For example, once you applied
+                        for a job using whatever job site you like, simple
+                        log into JobJournalTracker and add that job to your account including details like the title, the description,
+                        the company, the location, employment contract e.g. Zero hour, contract, full time, part-time, etc,
+
+
+                    </p>
+
+                    <p class="jobTrackerParagraph"> You can also add a journal along your recorded job describing
+                        what you are doing or done in preparation for the job, the url for the job, etc.
+                        JobJournalTracker also allows you to edit, delete, search or view any jobs that you have added to the site.
+                        You can easily search for your jobs using location, employment contract, title and so much more
+                    </p>
+
+
+                    <p class="jobTrackerParagraph">Whether you are a freelancer, agency worker, contractor, jobseeker, etc
+                        keeping track off all your jobs has never been easier. No more using software like Word, Excel, etc
+                        to keep track off all your job sites, responses, now you can simply do it here
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="banner">
+    <div class="container-fluid text-center">
+
+        <p class="banner-info">Now you can track all your jobs application in one place</p>
+        <p class="banner-info">Register below and start keeping tracks off all your jobs</p>
+        <p class="banner-info">Keeping track off all your jobs has never been easier</p>
+
+    </div>
+
+
+</section>
+
+<section id="Register">
+
+    <div class="container-fluid Register">
+
+        {% if session.username %}
+        <h1 class="WelcomeHeader">Welcome to job tracker </h1>
+        {% else %}
+        <h1 class="RegistrationHeader">Register and begin tracking your jobs</h1>
+        {% endif %}
+
+        <div class="row">
+
+
+            <div class="col-lg-6 offset-3">
+
+                {% if session.username %}
+                <img class="jobImage img-fluid mx-auto" src="{{ url_for('static', filename='images/welcome.jfif') }}" alt="welcome image">
+                <br>
+                <p class="jobTrackerParagraph">To begin simple click add job in the drop-down menu and we will do the rest</p>
+                {% else %}
+
+                <form method="post" action="{{ url_for('home_app.home') }}" role="form">
+                    {{ register_form.hidden_tag() }}
+                    <div class="form-group">
+
+
+                        {{ render_field(register_form.email, class="form-control",  id="registrationEmail", required=required, placeholder="Email.." ) }}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+
+                    <div class="form-group">
+                        {{ render_field(register_form.username, class="form-control", required=required,  placeholder="Username..." ) }}
+                        <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        {{ render_field(register_form.new_password, class="form-control", required=required, minlength="8", placeholder="password.." ) }}
+                        <small id="passwordHelp" class="form-text text-muted">Enter your password.</small>
+
+
+                    </div>
+                    <div class="form-group">
+                        {{ render_field(register_form.confirm, class="form-control",  minlength="8", placeholder="Confirm password.." ) }}
+                        <small id="confirmPasswordHelp" class="form-text text-muted">Confirm your password</small>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="banner2">
+    <div class="container-fluid text-center">
+
+
+        <p class="banner-info"> No more hassle</p>
+        <p class="banner-info">No more searching, remembering or tracking what jobs you have applied for</p>
+        <p class="banner-info">Saving Jobs, tracking interviews, what jobs you have applied for has never been easier</p>
+        <p class="banner-info">Register now and this site will do the rest</p>
+
+
+    </div>
+
+</section>
+
+<section id="contactUs">
+    <div class="container-fluid contactUs">
+        <div class="row-fluid">
+
+            <h1 class="contactUsHeader">Connect with us</h1>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <p class="jobTrackerParagraph">
+                        My name is Egbie and I am a mathematician, a test analyst, a freelancer and a python developer. I have been
+                        using Python and Flask <em>(This site was built entirely using Python 3.8, the flask framework along with
+                        CSS, Bootstrap and Javascript) </em>
+                        for a long time in order to solve problems. From small tasks to building websites, web scrappers, website automation testing which includes
+                        using different types of frameworks e.g Selenium, Robot, etc.
+
+                        <br>
+                        <br>
+                        As a test analyst I have the skills and in depth knowledge of testing which is
+                        a complete different skill set to developing. While the goal of developer is to develop, the goal of tester analyst is to
+                        destroy so to speak by finding bugs in any given application by coming up with interesting
+                        ways that program can be used, ways never intended by the developer which will result in either a crash, errors or worse the
+                        program or application does not crash but behaviours differently then the developer intended.
+
+
+                        <br>
+                        My knowledge of testing includes but not limited to manual testing, black box testing, white box testing, regression testing, etc
+
+                        <br>
+                        <br>
+                        I enjoy solving solving problems and mapping that problem into code, taking on new challenges, understanding and learning
+                        new techniques and technologies, finding interesting ways to test a given application, building things and it is one of the reason I built this site from the ground up
+                        in order to solve a particular problem.
+
+                    </p>
+                    <p class="jobTrackerParagraph">
+                        If you have any queries about this site or like to talk about a freelance project please contact me using the contact
+                        form on the right. Fill in your name, the email to respond to and your message and I will get back to you
+                        or contact me using the email <a href="#">egbieuku@hotmail.com</a>
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <form method="post" action="{{ url_for('home_app.contact_us') }}" role="form">
+                        {{ contact_form.hidden_tag() }}
+                        <div class="form-group">
+
+                            {{ render_field(contact_form.first_name, class="form-control", id="contactEmail", placeholder="Enter your first name....") }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ render_field(contact_form.surname, class="form-control", placeholder="Enter your surname....") }}
+                        </div>
+                        <div class="form-group">
+                            {{ render_field(contact_form.email, class="form-control", placeholder="Enter your email....") }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ render_field(contact_form.message, id="message", class="form-control",  minlength="1000", maxlength="1000",
+                            placeholder="Enter your messaage....")
+                            }}
+                            <div class="text-remaining" id="text-remaining">1000 characters remaining</div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!--src="{{ url_for('static', filename='js/textRemainingCounter.js')}}" -->
+<script type="text/javascript" >
+
+
+ var textArea = document.getElementById("message");
+    var remainingChars = document.getElementById("text-remaining");
+
+    var maxChars = 1000;
+
+
+    textArea.addEventListener("input", () => {
+                                    remaining = maxChars - textArea.value.length;
+                                    remainingChars.innerText = remaining + " characters remaining";
+                                    let color =  remaining < maxChars * 0.1 ? "red" : null;
+                                    remainingChars.style.color = color;
+
+                                    }
+                               )
+
+            </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

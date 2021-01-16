@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% from "__job_helper.html" import render_job_status %}
+{% block title %}My Jobs {% endblock %}
+
+
+{% block content %}
+  <section id="myJobs">
+    <div class="container">
+
+     {% include "flash_messages.html" %}
+
+      {% if jobs.total > 0 %}
+      <h1>My Jobs</h1>
+      <hr>
+      {% else %}
+        <h2>You have not added any jobs here yet</h2>
+        <p class="lead">Add some jobs using this <a href="{{ url_for('job_app.add_job') }}">link</a> and then come back here </p>
+      {% endif %}
+
+      {% for job in jobs.items %}
+          <div class="row">
+
+            <div class="col-lg-2">
+              <h5>Job title</h5>
+              <p class="lead"><a href="{{ url_for('job_app.get_job_with_id', job_id=job.id) }}">{{ job.title.title() | truncate(22) }}</a></p>
+            </div>
+
+            <div class="col-lg-5">
+              <h5>Applied date</h5>
+              <p class="lead">{{ job.applied_date.strftime("%A %d %B %Y, %H:%M:%S") }}</p>
+            </div>
+
+            <div class="col-lg-2">
+              <h5>Job Status</h5>
+                {{ render_job_status(job) }}
+            </div>
+
+            <div class="col-lg-3">
+              <a href="{{ url_for('job_app.edit_job', job_id=job.id) }}"><button type="button" name="button" class="btn btn-primary">Edit</button></a>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteJob">
+              Delete
+              </button>
+
+              <!-- The Modal -->
+              <div class="modal" id="deleteJob">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Delete job posting</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+
+                  <div class="modal-body">
+                  <p class="lead">Are you sure you want to permanently delete this job? This action cannot be reversed</p>
+                  <a href="{{ url_for('job_app.delete_job', job_id=job.id) }}"><button type="submit" name="yes" class="btn btn-primary">Yes</button></a>
+                  <button type="close" name="no" data-dismiss="modal" class="btn btn-danger">No</button>
+
+                </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         </div>
+      <hr>
+    {% endfor %}
+
+
+      <!-- Pagination Links-->
+<div class="text-right">
+    <a href="{{ url_for('job_app.jobs', page=jobs.prev_num) }}"
+       class="btn btn-outline-dark
+       {% if jobs.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+<!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in jobs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+<!-- Check for the active page and set the link to "Active"-->
+            {% if jobs.page == page_num %}
+            <a href="{{ url_for('job_app.jobs', page=page_num) }}"
+               class="btn btn-dark">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('job_app.jobs', page=page_num) }}"
+               class="btn btn-outline-dark">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('job_app.jobs', page=jobs.next_num) }}"
+       class="btn btn-outline-dark
+       {% if jobs.page == jobs.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+<p class="text-right mt-3">
+   Showing page {{ jobs.page }} of {{ jobs.pages }}
+</p>
+
+   </div>
+  </section>
+
+{% endblock %}
+

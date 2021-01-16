@@ -1,0 +1,100 @@
+
+{% macro render_job_status_alerts(job) %}
+
+{% if job.status == "GI" %}
+<div class="alert alert-warning mb-3" role="alert">
+    You have an <strong>interview</strong> for this job
+</div>
+{% elif job.status == "DGTJ" %}
+<div class="alert alert-danger mb-3" role="alert">
+    You did <strong>not get the job</strong>
+</div>
+{% elif job.status == "I" %}
+<div class="alert alert-warning mb-3" role="alert">
+    You have not yet applied for the job<strong>but your are interested</strong>
+</div>
+{% elif job.status == "GTJ" %}
+<div class="alert alert-success mb-3" role="alert">
+    congratulations <strong>you got the job</strong>
+</div>
+{% elif job.status == "NHB" %}
+<div class="alert alert-dark mb-3" role="alert">
+    The <strong>employer</strong> never responded back
+</div>
+{% endif %}
+{% endmacro %}
+
+
+
+{% macro render_job_status(job) %}
+{% if job.status == "A"%}
+    <strong>Applied </strong>
+{% elif job.status == "GI" %}
+    <strong>Interview</strong>
+{% elif job.status == "I" %}
+    <strong>Your are interested in the job</strong>
+{% elif job.status == "DGTJ" %}
+   <strong> Didn't get the job</strong>
+{% elif job.status == "GTJ" %}
+    <strong>Got the job</strong>
+</div>
+{% elif job.status == "NHB" %}
+<div class="alert alert-dark mb-3" role="alert">
+    <strong>Never responded back</strong>
+</div>
+{% endif %}
+{% endmacro %}
+
+
+
+
+
+{% macro render_job_status_alerts(job) %}
+
+{% if job.status == "GI" %}
+<div class="alert alert-warning mb-3" role="alert">
+    You have an <strong>interview</strong> for this job
+</div>
+{% elif job.status == "DGTJ" %}
+<div class="alert alert-danger mb-3" role="alert">
+    You did <strong>not get the job</strong>
+</div>
+{% elif job.status == "I" %}
+<div class="alert alert-warning mb-3" role="alert">
+    You have not yet applied for the job <strong>but your are interested</strong>
+</div>
+{% elif job.status == "GTJ" %}
+<div class="alert alert-success mb-3" role="alert">
+    congratulations <strong>you got the job</strong>
+</div>
+{% elif job.status == "NHB" %}
+<div class="alert alert-dark mb-3" role="alert">
+    The <strong>employer</strong> never responded back
+</div>
+{% endif %}
+{% endmacro %}
+
+
+
+{% macro render_job_status(job) %}
+{% if job.status == "A"%}
+    <strong>Applied </strong>
+{% elif job.status == "GI" %}
+    <strong>Interview</strong>
+{% elif job.status == "I" %}
+    <strong>Interested</strong>
+{% elif job.status == "DGTJ" %}
+   <strong> Didn't get the job</strong>
+{% elif job.status == "GTJ" %}
+    <strong>Got the job</strong>
+</div>
+{% elif job.status == "NHB" %}
+<div class="alert alert-dark mb-3" role="alert">
+    <strong>Never responded back</strong>
+</div>
+{% endif %}
+{% endmacro %}
+
+
+
+

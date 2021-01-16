@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %} My account {% endblock %}
+
+
+{% block content %}
+
+<section id="accounts">
+    <div class="container">
+
+    </div>
+    <div class="container accountSetting">
+        <div class="header">
+            <h1>Account settings</h1>
+        </div>
+
+        <div class="row">
+            <table class="table table-striped">
+
+                <thead>
+                <tr>
+                    <th scope="col">Accounts settings</th>
+                    <th scope="col">Edit/View</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td><p class="lead">Administrator account </p></td>
+                    <td><a href="#"><strong>{{ user.account[0].admin }}</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">Account creation date </p></td>
+                    <td><a href="#"><strong>{{ user.account[0].date_created.strftime("%A %d %B %Y, %H:%M:%S") }}</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">Email confirmation sent on </p></td>
+                    <td><a href="#"><strong>{{ user.account[0].user.email_confirmation_sent_on.strftime("%A %d %B %Y, %H:%M:%S") }}</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">Email confirmed on </p></td>
+                    <td><a href="#"><strong>{{ user.account[0].user.email_confirmed_on.strftime("%A %d %B %Y, %H:%M:%S") }}</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">Last logged in </p></td>
+                    <td><a href="#"><strong>{{ user.account[0].user.last_login.strftime("%A %d %B %Y, %H:%M:%S") }}</strong></a></td>
+
+                </tr>
+                <tr>
+
+                    <td><p class="lead">Username </p></td>
+                    <td><a href="#"><strong>{{ user.username.title() }}</strong></a></td>
+
+                </tr>
+                <tr>
+
+                    <td><p class="lead"><a href="#">Email ({{ user.email.lower() }})</a></p></td>
+                    <td><a href="{{ url_for('account_app.change_email') }}"><strong>Change email</strong></a></td>
+
+                </tr>
+                <tr>
+                    <td><p class="lead">Password</p></td>
+                    <td><a href="{{ url_for('account_app.change_old_password') }}"><strong>Change password</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">Phone number ({{ user.phone_number }}) </p></td>
+                    <td><a href="{{ url_for('account_app.add_phone_number') }}"><strong>Change or add phone number</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">View account history</p></td>
+                    <td><a href="{{ url_for('account_app.view_history') }}"><strong>view activities</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">Leave</p></td>
+                    <td><a href="{{ url_for('home_app.logout') }}"><strong>Sign out</strong></a></td>
+
+                </tr>
+
+                <tr>
+                    <td><p class="lead">De-activate account</p></td>
+                    <td>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete">
+                            De-activate account
+                        </button>
+
+                    </td>
+
+                    <!-- Button to Open the Modal -->
+
+
+                    <!-- The Modal -->
+                    <div class="modal" id="delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">De-activate account</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+
+                                <div class="modal-body">
+                                    <p class="lead">Are you sure you want to de-activate your account</p>
+                                    <p class="lead">Once this is done this action cannot be reversed and can only be
+                                        reverse by contacting the administrator of this site
+                                    </p>
+                                    <a href="{{ url_for('account_app.de_activate_account') }}">
+                                        <button type="submit" name="yes" class="btn btn-primary">Yes</button>
+                                    </a>
+                                    <button type="close" name="no" data-dismiss="modal" class="btn btn-danger">No
+                                    </button>
+
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

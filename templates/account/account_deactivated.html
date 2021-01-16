@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} Account de-activated {% endblock %}
+
+
+{% block content %}
+
+<section class="information_page">
+    <div class="container-fluid text-center">
+
+
+        <div class="alert alert-success mt-3" role="alert">
+          <h1 class="account-de-activation">Account de-activated</h1>
+        </div>
+
+        <p class="lead displayMessage">You have successfully deactivated your account
+        </p>
+        <p class="lead displayMessage">
+            Don't worry you can always re-activate your account just contact the administrator at jobjournaltrack@gmail.com
+        </p>
+
+        <p class="lead displayMessage">
+             Bye for now.
+        </p>
+        <hr class="my-4">
+        <p></p>
+
+        <div class="home_button">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('home_app.home') }}" role="button">Take me home</a>
+
+        </div>
+    </div>
+    </div>
+
+
+</section>
+
+{% endblock %}

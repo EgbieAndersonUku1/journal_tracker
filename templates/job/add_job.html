@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% from "__formhelpers.html" import render_field %}
+
+{% block title %}Job {% endblock %}
+
+
+{% block content %}
+
+<section id="addJob">
+
+    <div class="container addJobDetails">
+
+        {% include "flash_messages.html" %}
+
+
+        {% if edit %}
+        <h1>Edit job</h1>
+        {% else %}
+        <h1>Add job</h1>
+        {% endif %}
+        <hr>
+
+
+
+            {% if edit %}
+            <form method="POST" action="{{ url_for('job_app.edit_job', job_id=job_id) }}" role="form" enctype="multipart/form-data">
+                {% else %}
+                <form method="POST" action="{{ url_for('job_app.add_job') }}" role="form" enctype="multipart/form-data">
+                    {% endif %}
+
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ render_field(form.title, class="form-control", id="jobTitle", placeholder="job title") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ render_field(form.employment_type, class="form-control", id="employmentType", placeholder="job title") }}
+
+                    </div>
+                    <div class="form-group">
+                        {{ render_field(form.job_availability, class="form-control") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ render_field(form.job_url, class="form-control") }}
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col">
+                            {{ render_field(form.company, class="form-control", id="company", placeholder="company") }}
+
+                        </div>
+
+                        <div class="col">
+                            {{ render_field(form.location, class="form-control", id="location", placeholder="location") }}
+
+                        </div>
+
+
+
+                        <div class="col">
+                            {{ render_field(form.salary, type="number", step="0.01", min="0", class="form-control", id="salary", placeholder="Salary or wages..") }}
+
+                        </div>
+
+                        <div class="col">
+                            {{ render_field(form.status, class="form-control", id="status", placeholder="company") }}
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        {{ render_field(form.applied_job_from, class="form-control") }}
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                        {{ render_field(form.description, class="form-control", id="description", placeholder="company", minlength="255") }}
+
+                    </div>
+
+                    <div class="form-group">
+                        {{ render_field(form.journal, id="journal",
+                        placeholder="how your found the job, what your are doing in prepare for the job, etc", minlength="255") }}
+                    </div>
+                    {% if edit %}
+                    <button type="submit" name="button" class="btn btn-success">Update</button>
+                    <a href="{{ url_for('job_app.jobs') }})>">
+                        <button type="submit" name="button" class="btn btn-primary">Cancel</button></a>
+                    {% else %}
+                    <button type="submit" name="button" class="btn btn-primary">Save</button>
+                    {% endif %}
+                </form>
+
+                {{ ckeditor.load() }}
+                {{ ckeditor.config(name="description") }}
+                {{ ckeditor.config(name="journal") }}
+
+
+
+
+    </div>
+</section>
+
+
+{% endblock %}

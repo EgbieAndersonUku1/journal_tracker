@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+{% block title %} Dashboard {% endblock %}
+
+
+{% block content %}
+
+<section id="welcomeHeader">
+    <div class="container">
+
+        <h2 class="welcomeHeader">Welcome, {{ session.username.title() | truncate(30) }}</h2>
+        <hr>
+
+        <div class="col-lg-12">
+
+            <div class="row">
+
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+
+                        <div class="card-body">
+                            <a href="{{ url_for('job_app.add_job') }}"><h3 class="card-title">Add job</h3></a>
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% if session.email == ADMIN_EMAIL %}
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+
+                        <div class="card-body">
+                            <a href="{{ url_for('admin_app.admin') }}"><h3 class="card-title">Admin</h3></a>
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+                {% endif %}
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+
+                        <div class="card-body">
+                            <a href="{{ url_for('home_app.home') }}"><h3 class="card-title">Home</h3></a>
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+
+                        <div class="card-body">
+                            <a href="{{ url_for('home_app.logout') }}"><h3 class="card-title">Logout</h3></a>
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="{{ url_for('job_app.jobs') }}">My jobs</a></h3>
+                            <hr>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="{{ url_for('job_app.search') }}">Search</a></h3>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3">
+                    <div class="card welcomeCard">
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="{{ url_for('account_app.view_account') }}">Settings</a></h3>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="welcomeDivider">
+            <h4 class="welcomeCopyright">JobJournalTracker built by Egbie Uku @ 2020</h4>
+
+        </div>
+
+
+</section>
+
+{% endblock %}

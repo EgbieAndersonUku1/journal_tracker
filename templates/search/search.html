@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% from "__formhelpers.html" import render_field %}
+{% block content %}
+
+
+<section id="search">
+
+  <div class="container mb-3 search">
+    <h1 class="searchHeading">Search</h1>
+    <hr>
+    <form action="{{ url_for('job_app.queried_job_search') }}" method="post" role="form">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        {{ render_field(form.job_title, class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+
+      </div>
+
+      <div class="form-group">
+        {{ render_field(form.applied_job_from, class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+
+      </div>
+      <div class="form-group">
+        {{ render_field(form.employment_type, class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+
+      </div>
+
+      <div class="form-row">
+        <div class="col">
+           {{ render_field(form.company, class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+        </div>
+
+        <div class="col">
+           {{ render_field(form.countries, class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+        </div>
+
+        <div class="col">
+           {{ render_field(form.min_salary,  type="float", class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+        </div>
+
+        <div class="col">
+          {{ render_field(form.max_salary,  type="float", class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+        </div>
+
+        <div class="col mb-3">
+
+          {{ render_field(form.job_status,  class="form-control shadow-lg p-3 mb-5 bg-white rounded") }}
+
+
+        </div>
+
+
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block search-btn">Search</button>
+
+
+
+  </div>
+  </div>
+  </form>
+
+
+  </div>
+
+
+</section>
+
+
+
+
+{% endblock %}

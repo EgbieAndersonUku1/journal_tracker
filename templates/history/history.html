@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Account activities {% endblock %}
+
+
+{% block content %}
+  <section id="accountHistory">
+    <div class="container accountHistory">
+
+     {% include "flash_messages.html" %}
+
+      {% if histories.total > 0 %}
+      <h1>Account history</h1>
+      <hr>
+      {% else %}
+        <h2>There are no activities to display</h2>
+      {% endif %}
+
+      {% for history in histories.items %}
+          <div class="row">
+
+            <div class="col-lg-10">
+                <a href="#"><p class="lead">{{ history.activity }}</p></a>
+            </div>
+
+         </div>
+      <hr>
+    {% endfor %}
+
+
+      <!-- Pagination Links-->
+<div class="text-right">
+    <a href="{{ url_for('account_app.view_history', page=histories.prev_num) }}"
+       class="btn btn-outline-dark
+       {% if histories.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+<!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in histories.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+<!-- Check for the active page and set the link to "Active"-->
+            {% if histories.page == page_num %}
+            <a href="{{ url_for('account_app.view_history', page=page_num) }}"
+               class="btn btn-dark">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('account_app.view_history', page=page_num) }}"
+               class="btn btn-outline-dark">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('account_app.view_history', page=histories.next_num) }}"
+       class="btn btn-outline-dark
+       {% if histories.page == histories.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+<p class="text-right mt-3">
+   Showing page {{ histories.page }} of {{ histories.pages }}
+</p>
+
+   </div>
+  </section>
+
+{% endblock %}
+

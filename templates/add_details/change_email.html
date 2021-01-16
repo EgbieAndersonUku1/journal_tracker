@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% from "__formhelpers.html" import render_field %}
+{% block title %} Change my email {% endblock %}
+
+{% block content %}
+
+    <section id="updateEmail">
+
+      <div class="container changeEmail">
+         {% include "flash_messages.html" %}
+        <div class="col-lg-12">
+
+          <h1>Change Email</h1>
+          <hr>
+          <form method="post" action="{{ url_for('account_app.change_email') }}" role="form">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+
+              {{ render_field(form.email, class="form-control", required=required, placeholder="Your old email") }}
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+              {{ render_field(form.new_email, class="form-control", required=required, placeholder="Your new email address") }}
+              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+
+            <div>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeEmail">
+    Save
+  </button>
+
+  <!-- The Modal -->
+  <div class="modal" id="changeEmail">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Update email</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+
+      <div class="modal-body">
+        <p class="lead">Are you sure you want to update your email?</p>
+        <button type="submit" name="yes" class="btn btn-primary">Yes</button>
+        <button type="submit" name="no" class="btn btn-danger">No</button>
+      </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+          </form>
+        </div>
+
+      </div>
+
+    </section>
+
+
+{% endblock %}
+

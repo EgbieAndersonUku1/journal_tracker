@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital,wght@0,400;1,800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/css.css') }}">
+
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+<section id="navigationBar">
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="{{ url_for('home_app.landing_page') }}">JobJournalTracker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+           <li class="nav-item active">
+            <a class="nav-link nav-link-title" href="{{ url_for('home_app.landing_page') }}">About job tracker</a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link nav-link-title" href="{{ url_for('home_app.landing_page') }}">Contact me<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link nav-link-title" href="{{ url_for('home_app.landing_page') }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+
+
+          {% if session.username %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account Information
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url_for('job_app.add_job') }}">Add job</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('job_app.jobs') }}">My jobs</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('job_app.search') }}">Search my jobs</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('account_app.add_phone_number') }}">Add phone number</a>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('account_app.change_old_password') }}">Change password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('account_app.change_email') }}">Change email</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('account_app.view_account') }}">Account overview</a>
+              <div class="dropdown-divider"></div>
+
+            </div>
+          </li>
+
+           <li class="nav-item active">
+            <a class="nav-link nav-link-title" href="{{ url_for('home_app.dashboard') }}">Browse <span class="sr-only">(current)</span></a>
+          </li>
+          {% endif %}
+
+          {% if session.username %}
+          <li class="nav-item">
+            <a class="nav-link" href="#aboutJobTracker">Hi, {{ session.username.title() }}</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="logout" href="{{ url_for('home_app.logout') }}">Logout</a>
+          </li>
+          {% else %}
+
+          <li class="nav-item login-button-modal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              Login
+            </button>
+          </li>
+
+          <li class="nav-item register-button">
+            <a href="#Register"><button type="button register-button-modal" class="btn btn-success">Register</button>
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Login</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        {% from "__formhelpers.html" import render_field %}
+        <div class="modal-body">
+          <form method="post" action="{{ url_for('home_app.login') }}" role="form">
+            {{ login_form.hidden_tag() }}
+            <div class="form-group">
+
+              {{ render_field(login_form.email, class="form-control", id="loginEmail", placeholder="Email...") }}
+
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+
+              {{ render_field(login_form.password, class="form-control", id="loginPassword", placeholder="Password...") }}
+              <small id="passwordHelp" class="form-text text-muted">
+                <a href="{{ url_for('account_app.reset_password') }}">Forgotten Password</a></small>
+
+            </div>
+
+                <button type="submit" id="login" class="btn btn-primary btn-lg btn-block">Login</button>
+
+
+          </form>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+
+  <div class="row front-page-image">
+    <img src="{{ url_for('static', filename='images/job.png') }}" class="img-fluid jobBannerImg" alt="job image">
+  </div>
+
+
+
+
+{% block content %} {% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/logoutUserFromAllOpenTabs.js') }}">
+
+
+
+
+
+
+
+
+</script>
+
+{% include "footer.html" %}
+
+
+</body>
+
+</html>

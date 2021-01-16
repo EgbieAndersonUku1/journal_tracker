@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% from "__job_helper.html" import render_job_status_alerts %}
+{% block title %}Job and activity summary {% endblock %}
+
+{% block content %}
+<section id="jobPost">
+
+  <div class="container jobPost">
+     {% include "flash_messages.html" %}
+    <h1 class="jobPostH1Heading">Job and activity summary</h1>
+    <hr>
+
+
+    <div class="row">
+      <div class="col-lg-8 offset-md-1 job-article">
+
+        <div class="alert alert-primary mt-3" role="alert">
+          You applied for this job on <strong>{{ job.applied_date.strftime("%A %d %B %Y, %H:%M:%S") }}</strong>
+        </div>
+        <div class="alert alert-success mt-3" role="alert">
+          You applied for this job from the job website <strong>{{ job.applied_job_from.title() }}</strong>
+        </div>
+
+        <div class="alert alert-success mt-3" role="alert">
+          Click <a href="{{ job.job_url }}" target="_blank">here</a> to open a new window to the job you
+            applied on <strong>{{ job.applied_job_from.title() }}</strong>
+        </div>
+
+
+        {% if job.job_availability == "JA" %}
+          <div class="alert alert-primary mt-3" role="alert">
+             The job is still <strong>Active</strong> on the site
+        </div>
+        {% else %}
+          <div class="alert alert-danger mt-3" role="alert">
+            The job is <strong> no longer</strong> available on the site <strong>{{ job.applied_job_from.title() }}</strong>
+        </div>
+
+        {% endif %}
+
+        <div class="alert alert-warning mt-3" role="alert">
+          Employment contract: <strong>{{ job.employment_type.title() }}</strong>
+        </div>
+
+        {{ render_job_status_alerts(job) }}
+
+        <h2>Job Title</h2>
+        <p class="lead">{{ job.title.title() }}</p>
+        <h2>Company Name</h2>
+        <p class="lead">{{ job.company.title() }}
+
+        <h2>Location </h2>
+        <p class="lead">{{ job.location.title() }}</p>
+        <h2>Salary</h2>
+        <p class="lead">£{{ job.salary }}
+          <hr>
+        <p class="lead">
+          {{ job.description | safe }}
+        </p>
+        <hr>
+
+        <h2>Job Activity/Journal</h2>
+        <p class="lead">
+         {{ job.journal | safe }}
+        </p>
+        <hr>
+
+
+        <div>
+          <!-- Button to Open the Modal -->
+
+          <a href="{{ url_for('job_app.edit_job', job_id=job.id) }}">
+            <button type="submit" name="button" class="btn btn-primary">Edit</button></a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete">
+            Delete
+          </button>
+          <hr>
+          <em>Lasted edited {{ job.last_edited.strftime("%A %d %B %Y, %H:%M:%S") }}</em>
+
+          <!-- The Modal -->
+          <div class="modal" id="delete">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete job posting</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                <div class="modal-body">
+                  <p class="lead">Are you sure you want to permanently delete this job? This action cannot be reversed</p>
+                  <a href="{{ url_for('job_app.delete_job', job_id=job.id) }}"><button type="submit" name="yes" class="btn btn-primary">Yes</button></a>
+                  <button type="close" name="no" data-dismiss="modal" class="btn btn-danger">No</button>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+<!--        </div> End of modal -->
+
+        </div>
+      </div>
+  </div>
+</section>
+
+{% endblock %}
