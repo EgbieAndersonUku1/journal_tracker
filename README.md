@@ -43,8 +43,10 @@ sites each password belongs too. This is exactly the same but instead of passwor
 To run this application on your computer create a virtual environment. The virtual environment is optional but it
 is always a good idea to create a new environment so that you do not break any previous programs that you have written
 
-1. Once the virtual environment has been created simple run the requirements.txt file by entering the command in the root
-directory
+1. Create a folder you can name whatever you want
+1. Type the command git clone https://github.com/EgbieAndersonUku1/journal_tracker.git . (The start tells github not to create a folder but instead 
+   download it to your current folder instead
+1.  run the requirements.txt file by entering the command inside your root directory
 
     1. pip install -r requirements.txt
     
