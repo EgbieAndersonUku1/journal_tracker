@@ -132,7 +132,7 @@ Now open a terminal in the root directory and enter the following command
 
 
 ## About the author
-0 I have been
+I have been
 using Python and Flask <em>(This site was built entirely using Python 3.8, the flask framework along with
 CSS, Bootstrap and Javascript) </em> for a long time in order to solve problems. 
 From small tasks to building websites, web scrappers, website automation testing which includes
