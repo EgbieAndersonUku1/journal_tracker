@@ -132,8 +132,7 @@ Now open a terminal in the root directory and enter the following command
 
 
 ## About the author
-
- My name is Egbie for short and I am a mathematician, a test analyst, a freelancer and a python developer. I have been
+0 I have been
 using Python and Flask <em>(This site was built entirely using Python 3.8, the flask framework along with
 CSS, Bootstrap and Javascript) </em> for a long time in order to solve problems. 
 From small tasks to building websites, web scrappers, website automation testing which includes
@@ -153,10 +152,4 @@ new techniques, technologies and new testing methods, finding interesting ways t
 building things to solve a given problem, it is one of the primary reason I built this site to solve a particular problem.
 
         
-If you have any queries about this site or like to talk about a freelance project please contact me using the contact
-email <a href="#">egbieuku@hotmail.com</a>
 
-
-
-## Website
-To use the website visit the link https://www.jobjournaltracker.com
